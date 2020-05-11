@@ -9,7 +9,7 @@ export default class Header extends Component {
   };
 
   handleSignInClick = () => {
-    window.open("https://richpaneldash.herokuapp.com/auth/twitter", "_self");
+    window.open("http://localhost:4000/auth/twitter", "_self");
   };
 
   render() {

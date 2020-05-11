@@ -12,15 +12,6 @@ import OverView from "./DashboardNew/OverView";
 import VerticalNav from "./DashboardNew/VerticalNav";
 
 class HomePage extends Component {
-  static propTypes = {
-    user: PropTypes.shape({
-      name: PropTypes.string,
-      profileImageUrl: PropTypes.string,
-      twitterId: PropTypes.string,
-      screenName: PropTypes.string,
-      _id: PropTypes.string
-    })
-  };
 
   state = {
     user: {},
@@ -30,7 +21,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     // Fetch does not send cookies. So you should add credentials: 'include'
-    fetch("https://richpaneldash.herokuapp.com/auth/login/success", {
+    fetch("http://localhost:4000/auth/login/success", {
       method: "GET",
       credentials: "include",
       headers: {

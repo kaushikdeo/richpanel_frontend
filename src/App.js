@@ -11,12 +11,12 @@ import { ApolloProvider } from "@apollo/react-hoc";
 // import './App.css'
 
 const httpLink = createUploadLink({
-  uri: 'https://richpaneldash.herokuapp.com/graphql',
+  uri: 'http://localhost:4000/graphql',
   credentials: "same-origin"
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://richpaneldash.herokuapp.com/graphql`,
+  uri: `ws://localhost:4000/graphql`,
   options: {
     
     reconnectionAttempts: 50,
@@ -72,7 +72,6 @@ const client = new ApolloClient({
     if (networkError) {
       if (networkError.statusCode === 401) {
         // remove token
-        localStorage.removeItem("wedupp-auth-token");
       }
     }
   }
