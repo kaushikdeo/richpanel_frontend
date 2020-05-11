@@ -11,12 +11,12 @@ import { ApolloProvider } from "@apollo/react-hoc";
 // import './App.css'
 
 const httpLink = createUploadLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'https://richpaneldash.herokuapp.com/graphql',
   credentials: "same-origin"
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
+  uri: `ws://richpaneldash.herokuapp.com/graphql`,
   options: {
     
     reconnectionAttempts: 50,
