@@ -14,28 +14,24 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
   const [mentions, setMentions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    if (fetchMentions && !fetchMentions.loading && fetchMentions.fetchCurrentMentions && fetchMentions.fetchCurrentMentions.length > 0) {
-      setIsLoading(false);
-      setMentions(fetchMentions.fetchCurrentMentions.reverse());
+    if (fetchMentions && 
+        !fetchMentions.loading && 
+        fetchMentions.fetchCurrentMentions && 
+        fetchMentions.fetchCurrentMentions.length > 0) {
+          setIsLoading(false);
+          setMentions(fetchMentions.fetchCurrentMentions.reverse());
     }
   }, [fetchMentions]);
 
   useEffect(() => {
     if (newMention && !newMention.loading && newMention.newMention) {
-      const allStateMentions = [...mentions];
-      console.log('allStateMentions', allStateMentions);
-      console.log('NEW MENTION', newMention.newMention[0]);
+      let allStateMentions = [...mentions];
       const index = allStateMentions.findIndex((e) => e.mentionID === newMention.newMention[0].mentionID);
-      console.log('HELLO', index);
-
-      if (index === -1) {
-          allStateMentions.unshift(newMention.newMention[0]);
-      } else {
+      index === -1 ?
+        allStateMentions.unshift(newMention.newMention[0]) :
         allStateMentions[index] = newMention.newMention[0];
+        setMentions(allStateMentions);
       }
-      console.log('allStateMentions', allStateMentions)
-      setMentions(allStateMentions);
-    }
   }, [newMention])
 
 
@@ -45,6 +41,7 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
   };
 
   const handleAddNewTask = (mentionID, taskText) => {
+    console.log('mentionID', mentionID, 'taskText', taskText)
     if (taskText) {
       addNewMentionTask({
         variables: {
@@ -61,7 +58,16 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
       });
     }
   }
-  console.log('PROPS', newMention);
+
+  const handleAddMentionReply = (reply) => {
+    let allStateMentions = [...mentions];
+    console.log('MENTIONS', mentions);
+    const index  = mentions.findIndex(m => m.mentionID === reply.in_reply_to_status_id_str);
+    if (index >= 0) {
+      allStateMentions[index].replies.push(reply);
+    }
+    setMentions(allStateMentions);
+  }
   return (
     <div className='container-fluid pl-0 pr-0'>
       <div style={{display:'flex',minWidth:938}}>
@@ -76,7 +82,7 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
               <SearchBar />
             </div>
           </div>
-          <OverView handleAddNewTask={handleAddNewTask} isLoading={isLoading} mentions={mentions} />
+          <OverView handleAddMentionReply={handleAddMentionReply} handleAddNewTask={handleAddNewTask} isLoading={isLoading} mentions={mentions} />
         </div>
         </div>
       </div>

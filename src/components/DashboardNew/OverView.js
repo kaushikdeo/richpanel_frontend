@@ -4,7 +4,7 @@ import Mention from './Mention';
 import Profile from './Profile';
 import '../../index.css';
 
-const OverView = ({mentions, isLoading, handleAddNewTask, handleEnterReply}) => {
+const OverView = ({mentions, isLoading, handleAddNewTask, handleAddMentionReply}) => {
   const [currentMention, setCurrentMention] = useState(null);
   const setSelectedMention = (mentionId) => {
     const selectedMention = mentions.find(m => m.mentionID == mentionId);
@@ -18,7 +18,7 @@ const OverView = ({mentions, isLoading, handleAddNewTask, handleEnterReply}) => 
       <section className='col-9 tweet-view'>
       <article className='row tweet-view-wrap'>
       <div className="col-9 tweet-view-area" style={{marginBottom:0,paddingBottom:0}}>
-        <Mention handleEnterReply={handleEnterReply} handleEnterReply={handleEnterReply} handleAddNewTask={handleAddNewTask} currentMention={currentMention} />
+        <Mention handleAddMentionReply={handleAddMentionReply} handleAddNewTask={handleAddNewTask} currentMention={currentMention} />
       </div>
       <div className="col-3">
         <Profile currentMention={currentMention} />

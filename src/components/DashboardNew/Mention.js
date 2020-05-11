@@ -5,7 +5,7 @@ import { REPLYTOMENTION } from '../../graphql/appMutations';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
-const Mention = ({currentMention, replyToMention, handleAddNewTask}) => {
+const Mention = ({currentMention, replyToMention, handleAddNewTask, handleAddMentionReply}) => {
   const [taskText, setTaskText] = useState('');
   const [modalStatus, setModalStatus] = useState(false);
   const messageBoxRef = useRef(null);
@@ -21,7 +21,10 @@ const Mention = ({currentMention, replyToMention, handleAddNewTask}) => {
             userHandle: currentMention.userData.mentionFromScreenName,
           }
         })
-        .then(res => messageBoxRef.current.innerText='')
+        .then(res => {
+          messageBoxRef.current.innerText='';
+          handleAddMentionReply(res.data.replyToMention)
+        })
         .catch(err => console.log(err));
       }
     }
@@ -29,9 +32,7 @@ const Mention = ({currentMention, replyToMention, handleAddNewTask}) => {
 
   const renderReplies = () => {
     if (currentMention && currentMention.replies && currentMention.replies.length > 0) {
-      console.log('currentMention.replies', currentMention.replies);
       return currentMention.replies.map(reply => {
-        console.log('REPLY REPLY', reply)
         return (
           <article style={{display:'flex',padding:'15px 0'}}>
             <div className='task-view-area__content__profile'><img src={reply.userData.profileImage} alt=""/> </div>
@@ -95,7 +96,7 @@ const Mention = ({currentMention, replyToMention, handleAddNewTask}) => {
                       <input style={{flex: 1, width: '100%', alignItems: 'center'}} onChange={(e) => setTaskText(e.target.value)} />
                     </div>
                     <div>
-                      <button style={{flex: 1, width: '100%', alignItems: 'center', padding: 10}} type="button" class="btn btn-primary" onClick={addNewTask}>
+                      <button style={{flex: 1, width: '100%', alignItems: 'center', padding: 10}} type="button" className="btn btn-primary" onClick={addNewTask}>
                         Add New Task
                       </button>
                     </div>
@@ -116,7 +117,7 @@ const Mention = ({currentMention, replyToMention, handleAddNewTask}) => {
           {/*<input onChange={(e) => handleEnterReply(e)}/>*/}
           <div style={{display: 'flex', alignItems: 'flex-end'}}>
             <div ref={messageBoxRef} style={{flex: 1, border:'1.5px solid gray',borderRadius:7,outline:'none',padding:'4px 10px'}}contentEditable={true} ></div>          
-            <button type="button" class="btn btn-primary" onClick={handleEnterReply}>
+            <button type="button" className="btn btn-primary" onClick={handleEnterReply}>
               Fire Reply
             </button>
           </div>

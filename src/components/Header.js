@@ -25,7 +25,7 @@ export default class Header extends Component {
         </div>
       </div>
       <div className="Subtitle">
-        <p style={{marginBottom:7}}>Keyon - <a style={{color:'#00897B'}} href="http://www.uplabs.com/KeyonLulu" target="_Blank">UpLabs</a></p>
+        <p style={{marginBottom:7}}>Kaushik M. Deo</p>
       </div>
 
       <div id="fp-nmp" className="NMP nv mds-2">

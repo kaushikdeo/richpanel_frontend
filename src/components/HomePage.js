@@ -48,24 +48,12 @@ class HomePage extends Component {
         localStorage.setItem('authToken', responseJson.user.token);
         localStorage.setItem('authTokenSecret', responseJson.user.tokenSecret);
         localStorage.setItem('authTokenSecret', responseJson.user.tokenSecret);
-        // fetch(`http://localhost:4000/webhook?token=${responseJson.user.token}&tokenSecret=${responseJson.user.tokenSecret}`, {
-        //   method: "POST",
-        //   credentials: "include",
-        //   headers: {
-        //     Accept: "application/json",
-        //     "Content-Type": "application/json",
-        //     "Access-Control-Allow-Credentials": true
-        //   }
-        // })
-        // .then(mentions => console.log(mentions))
-        // .catch(e => console.log(e))
         this.setState({
           authenticated: true,
           user: responseJson.user
         });
       })
       .catch(error => {
-        console.log('error', error);
         this.setState({
           authenticated: false,
           error: "Failed to authenticate user"

@@ -1,6 +1,5 @@
 import React from 'react';
 import Profile from './Profile';
-import image1 from '../../images/1.jpg'
 
 const MentionPreviewCard = ({mention}) => {
   return (
