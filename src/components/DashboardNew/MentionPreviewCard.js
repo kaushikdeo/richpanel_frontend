@@ -1,9 +1,9 @@
 import React from 'react';
 import Profile from './Profile';
 
-const MentionPreviewCard = ({mention}) => {
+const MentionPreviewCard = ({mention, currentMention}) => {
   return (
-    <div id='mention-prev-card'>
+    <div id='mention-prev-card' style={{backgroundColor:currentMention?.mentionID === mention?.mentionID ? '#d1d1d1':'white'}}>
       <article style={{display:'flex'}}>
       <div>
         <img src={mention.userData.profileImage} style={{height:30,width:30,borderRadius:100,boxShadow:'0 0 rgba(0,0,0,0.2)'}}/>

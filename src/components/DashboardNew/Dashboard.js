@@ -5,8 +5,8 @@ import SearchBar from './SearchBar';
 import OverView from './OverView';
 import { compose } from 'react-apollo';
 import { graphql} from '@apollo/react-hoc';
-import { FETCH_MENTIONS, SETUP_WEBHOOK } from '../../graphql/appQueries';
-import { ADDNEWTASKTOMENTION } from '../../graphql/appMutations';
+import { FETCH_MENTIONS } from '../../graphql/appQueries';
+import { ADDNEWTASKTOMENTION, SETUP_WEBHOOK } from '../../graphql/appMutations';
 import { MENTION_SUBSCRIPTION } from '../../graphql/appSubscriptions';
 import Mentions from './Mentions';
 
@@ -92,7 +92,6 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
 
 export default compose(
   graphql(FETCH_MENTIONS, {name: 'fetchMentions'}),
-  graphql(SETUP_WEBHOOK, {name: 'setUpWebHook'}),
   graphql(ADDNEWTASKTOMENTION, { name: 'addNewMentionTask' }),
   graphql(MENTION_SUBSCRIPTION, { name: 'newMention' })
 )(Dashboard);

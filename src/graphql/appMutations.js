@@ -59,3 +59,12 @@ export const ADDNEWTASKTOMENTION = gql`
   }
 }
 `;
+
+export const SETUP_WEBHOOK = gql`
+  mutation setupWebhook{
+    setupWebhook{
+      success
+      message
+    }
+  }
+`

@@ -13,7 +13,7 @@ const OverView = ({mentions, isLoading, handleAddNewTask, handleAddMentionReply}
   return (
     <div className="row">
       <div className="col-3 mentionsSection">
-        <Mentions isLoading={isLoading} setSelectedMention={setSelectedMention} mentions={mentions} />
+        <Mentions isLoading={isLoading} setSelectedMention={setSelectedMention} mentions={mentions} currentMention={currentMention} />
       </div>
       <section className='col-9 tweet-view'>
       <article className='row tweet-view-wrap'>

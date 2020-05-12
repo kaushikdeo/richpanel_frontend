@@ -1,12 +1,13 @@
 import React from 'react';
 import image1 from '../../images/1.jpg';
-import rubyIcon from '../../images/ruby.png';
+import rubyIcon from '../../images/ruby.svg';
 import homeIcon from '../../images/home.svg';
 import menIcon from '../../images/men.svg';
 import chatIcon from '../../images/communications.svg';
 import cardIcon from '../../images/credit-card.svg';
 import storeIcon from '../../images/store.svg';
 import settingIcon from '../../images/settings.svg';
+import clockIcon from '../../images/clock.svg'
 
 const VerticalNav = ({handleLogoutClick}) => {
   return (
@@ -16,6 +17,13 @@ const VerticalNav = ({handleLogoutClick}) => {
           <a className="nav-link active" style={{display:'flex',justifyContent:'center',alignItems:'center'}} href="#">
             <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:25,width:30,marginTop:5,marginBottom:25}}>
               <img onClick={handleLogoutClick} src={rubyIcon} alt="" style={{height:'100%',width:'100%'}}/>
+            </div>
+          </a>
+        </li>
+        <li className="nav-item custom-nav-item" style={{marginTop:15}}>
+          <a className="nav-link active" style={{display:'flex',justifyContent:'center',alignItems:'center'}} href="#">
+            <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:20,width:20}}>
+              <img src={clockIcon} alt="" style={{height:'100%',width:'100%'}}/>
             </div>
           </a>
         </li>
@@ -34,7 +42,7 @@ const VerticalNav = ({handleLogoutClick}) => {
             </div>
           </a>
         </li>
-        <li className="nav-item custom-nav-item" style={{marginTop:15}}>
+        <li className="nav-item custom-nav-item active-nav-item" style={{marginTop:15}}>
           <a className="nav-link" style={{display:'flex',justifyContent:'center',alignItems:'center'}} href="#">
             <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:20,width:20}}>
             <img src={chatIcon} alt="" style={{height:'100%',width:'100%'}}/>

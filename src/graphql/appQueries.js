@@ -43,12 +43,3 @@ export const FETCH_MENTIONS = gql`
   }
 }`;
 
-export const SETUP_WEBHOOK = gql`
-  query setupWebhook{
-    setupWebhook{
-      success
-      message
-    }
-  }
-`
-

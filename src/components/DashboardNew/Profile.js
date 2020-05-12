@@ -10,7 +10,7 @@ const Profile = ({currentMention}) => {
         return <div style={{display:'flex'}}><input checked={task.isCompleted} style={{marginTop:3.5}} type="checkbox" name="" id=""/> <label style={{margin:0,marginLeft:10}} htmlFor="">{task.taskText}</label></div>
       })
     } else {
-      return <h4>NO TASKS</h4>
+      return <div className='centerContent' style={{minHeight:100}}><p>NO TASKS YET</p></div>
     }
   }
   return currentMention ?

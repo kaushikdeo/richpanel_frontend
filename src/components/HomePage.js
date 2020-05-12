@@ -10,6 +10,7 @@ import AppNavigation from './DashboardNew/AppNavigation';
 import SearchBar from "./DashboardNew/SearchBar";
 import OverView from "./DashboardNew/OverView";
 import VerticalNav from "./DashboardNew/VerticalNav";
+import { SETUP_WEBHOOK } from "../graphql/appMutations";
 
 class HomePage extends Component {
   static propTypes = {
@@ -45,6 +46,7 @@ class HomePage extends Component {
       })
       .then(responseJson => {
         //subscribe to webhook
+        this.props.setUpWebHook();
         localStorage.setItem('authToken', responseJson.user.token);
         localStorage.setItem('authTokenSecret', responseJson.user.tokenSecret);
         localStorage.setItem('authTokenSecret', responseJson.user.tokenSecret);
@@ -87,4 +89,5 @@ class HomePage extends Component {
 
 export default compose(
   graphql(GREETINGS),
+  graphql(SETUP_WEBHOOK, {name: 'setUpWebHook'}),
 )(HomePage);

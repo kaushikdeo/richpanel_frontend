@@ -11,6 +11,9 @@ p{
   padding: 0;
 }
 
+a{
+  outline: none;
+}
 /* Assign grid instructions to our parent grid container, mobile-first (hide the sidenav) */
 .grid-container {
   display: grid;
@@ -236,6 +239,10 @@ a.nav-link{
   padding:10px;
   overflow: hidden;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+#mention-prev-card:hover{
+  background: #DCDCDC !important;
 }
 
 section.tweet-view{
@@ -317,6 +324,20 @@ article.tweet-view-wrap{
   justify-self: flex-end;
   
   /* max-width: calc(100vw - (300px)); */
+}
+.task-view-area__content__input__attachment{
+  height:28px !important;
+  width:28px;
+  border-radius:100px;
+  background-color:transparent;
+  position:absolute;
+  right:10px;
+  bottom:3px;
+  cursor: pointer;
+}
+
+.task-view-area__content__input__attachment:hover{
+  background-color:#f7f7f7;
 }
 .task-view-area__content__input div{
   word-break: break-all;
@@ -424,9 +445,15 @@ div.search-container form input{
   justify-content: center;
   align-items: center;
 }
-
+.custom-nav-item{
+  transition: all 0.2s ease-in-out;
+}
 .custom-nav-item:hover{
   background-color: #cbcbcb;
+}
+
+.active-nav-item{
+  background-color: #d8d8d8;
 }
 
 .conv-header__status{
