@@ -16,7 +16,7 @@ const httpLink = createUploadLink({
 });
 
 const wsLink = new WebSocketLink({
-  uri: `wss://richpaneldash.herokuapp.com`,
+  uri: `ws://richpaneldash.herokuapp.com/graphql`,
   options: {
     reconnectionAttempts: 50,
     lazy: true,
