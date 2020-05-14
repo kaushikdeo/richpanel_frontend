@@ -21,7 +21,7 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
         fetchMentions.fetchCurrentMentions && 
         fetchMentions.fetchCurrentMentions.length > 0) {
           setIsLoading(false);
-          setMentions(fetchMentions.fetchCurrentMentions.reverse());
+          setMentions(fetchMentions.fetchCurrentMentions.sort((a, b) => b.timeStamp - a.timeStamp));
     }
   }, [fetchMentions]);
 
@@ -32,7 +32,7 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
       index === -1 ?
         allStateMentions.unshift(newMention.newMention[0]) :
         allStateMentions[index] = newMention.newMention[0];
-        setMentions(allStateMentions);
+        setMentions(allStateMentions.sort((a, b) => b.timeStamp - a.timeStamp));
         setCurrentMention(newMention.newMention[0]);
       }
   }, [newMention]);
@@ -60,7 +60,7 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
          selectedMention.tasks.push(res.data.addNewMentionTask);
          const filteredMentions = allMentions.filter(me => me.mentionID !== mentionID);
          filteredMentions.push(selectedMention);
-          setMentions(filteredMentions);
+          setMentions(filteredMentions.sort((a, b) => b.timeStamp - a.timeStamp));
       });
     }
   }
@@ -71,7 +71,7 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
     if (index >= 0) {
       allStateMentions[index].replies.push(reply);
     }
-    setMentions(allStateMentions);
+    setMentions(allStateMentions.sort((a, b) => b.timeStamp - a.timeStamp));
   }
   return (
     <div className='container-fluid pl-0 pr-0'>
