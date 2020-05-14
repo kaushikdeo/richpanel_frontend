@@ -5,19 +5,20 @@ import { REPLYTOMENTION } from '../../graphql/appMutations';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 import attachmentIcon from '../../images/attachment.svg';
+import TimeUtils from '../../utils/formatTime';
 
 const Mention = ({currentMention, replyToMention, handleAddNewTask, handleAddMentionReply}) => {
   const [taskText, setTaskText] = useState('');
   const [isRelying, setIsReplying] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
   const messageBoxRef = useRef(null);
+  const messageContinerRef = useRef(null);
 
   const handleEnterReply = (e) => {
     e.preventDefault();
     setIsReplying(true);
     if(messageBoxRef.current){
       if (messageBoxRef.current.innerText !== '') {
-        console.log(messageBoxRef.current.innerText,'here is the value')
         replyToMention({
           variables: {
             InReplyToStatus: currentMention.mentionID,
@@ -28,9 +29,12 @@ const Mention = ({currentMention, replyToMention, handleAddNewTask, handleAddMen
         .then(res => {
           messageBoxRef.current.innerText='';
           handleAddMentionReply(res.data.replyToMention);
-          setIsReplying(true);
+          setIsReplying(false);
         })
-        .catch(err => {console.log(err);});
+        .catch(err => {
+          console.log(err);
+          setIsReplying(false);
+        });
         
       }
     }
@@ -39,9 +43,8 @@ const Mention = ({currentMention, replyToMention, handleAddNewTask, handleAddMen
   const renderReplies = () => {
     if (currentMention && currentMention.replies && currentMention.replies.length > 0) {
       return currentMention.replies.map(reply => {
-        console.log('reply', reply);
         return (
-          <article style={{display:'flex',padding:'15px 0'}}>
+          <article key={reply._id} style={{display:'flex',padding:'15px 0'}}>
             <div className='task-view-area__content__profile'><img src={reply.userData.profileImage} alt=""/> </div>
             <div style={{flex:1}}>
               <p style={{margin:0,fontSize:12}}>{reply.mentionText}</p>
@@ -54,7 +57,7 @@ const Mention = ({currentMention, replyToMention, handleAddNewTask, handleAddMen
               }
               </div>
             </div>
-            <div style={{width:60}}><span style={{fontSize:10}} >{new Date(currentMention.timeStamp).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}</span></div>
+            <div style={{width:60}}><span style={{fontSize:12}} >{TimeUtils.formatTime(currentMention.timeStamp)}</span></div>
           </article>
         )
       })
@@ -91,7 +94,7 @@ const Mention = ({currentMention, replyToMention, handleAddNewTask, handleAddMen
           <button onClick={handleOpenModal} style={{background:'#f7f7f7',outline:'none',border:'none',borderRadius:'10rem',padding:'5px 15px',fontSize:14}}>Create a task</button>
         </header>
         <article className='task-view-area__content'>
-          <div className='task-view-area__content__view'>
+          <div className='task-view-area__content__view' ref={messageContinerRef}>
             <article style={{display:'flex',padding:'15px 0'}}>
               <div className='task-view-area__content__profile'><img src={currentMention.userData.profileImage} alt=""/> </div>
               <div style={{flex:1}}>
@@ -116,7 +119,7 @@ const Mention = ({currentMention, replyToMention, handleAddNewTask, handleAddMen
                 }
                 </div>
               </div>
-              <div style={{width:60}}><span style={{fontSize:10}} >{new Date(currentMention.timeStamp).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}</span></div>
+              <div style={{width:60}}><span style={{fontSize:12}} >{TimeUtils.formatTime(currentMention.timeStamp)}</span></div>
             </article>
             {renderReplies()}
           </div>
@@ -127,13 +130,14 @@ const Mention = ({currentMention, replyToMention, handleAddNewTask, handleAddMen
             <div ref={messageBoxRef} 
             style={{flex: 1, border:'1.5px solid #cbcbcb',borderRadius:7,outline:'none',padding:'4px 50px 4px 10px'}}
             onKeyDown={(e)=>e.keyCode === 13 ? handleEnterReply(e) : null}
-            contentEditable={true} >
+            contentEditable={true} />
             {isRelying &&
-              <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
+              <div className="centerContent" style={{width: 30, height: 30, position: 'absolute', right: 50, top: 3}}>
+                <div className="spinner-border" style={{height: 20, width: 20}} role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
               </div>
             }
-            </div> 
             <div className='centerContent task-view-area__content__input__attachment'>
               <img src={attachmentIcon} style={{height:16,width:16}} />
             </div>         

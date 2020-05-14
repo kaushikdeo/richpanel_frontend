@@ -13,6 +13,8 @@ import Mentions from './Mentions';
 const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
   const [mentions, setMentions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentMention, setCurrentMention] = useState(null);
+
   useEffect(() => {
     if (fetchMentions && 
         !fetchMentions.loading && 
@@ -31,17 +33,21 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
         allStateMentions.unshift(newMention.newMention[0]) :
         allStateMentions[index] = newMention.newMention[0];
         setMentions(allStateMentions);
+        setCurrentMention(newMention.newMention[0]);
       }
-  }, [newMention])
+  }, [newMention]);
 
+  const setSelectedMention = (mentionId) => {
+    const selectedMention = mentions.find(m => m.mentionID == mentionId);
+    setCurrentMention(selectedMention);
+  }
 
   const handleLogoutClick = () => {
-    window.open("https://richpaneldash.herokuapp.com/auth/logout", "_self");
+    window.open("http://localhost:4000/auth/logout", "_self");
     this.props.handleNotAuthenticated();
   };
 
   const handleAddNewTask = (mentionID, taskText) => {
-    console.log('mentionID', mentionID, 'taskText', taskText)
     if (taskText) {
       addNewMentionTask({
         variables: {
@@ -61,7 +67,6 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
 
   const handleAddMentionReply = (reply) => {
     let allStateMentions = [...mentions];
-    console.log('MENTIONS', mentions);
     const index  = mentions.findIndex(m => m.mentionID === reply.in_reply_to_status_id_str);
     if (index >= 0) {
       allStateMentions[index].replies.push(reply);
@@ -82,7 +87,7 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
               <SearchBar />
             </div>
           </div>
-          <OverView handleAddMentionReply={handleAddMentionReply} handleAddNewTask={handleAddNewTask} isLoading={isLoading} mentions={mentions} />
+          <OverView currentMention={currentMention} setSelectedMention={setSelectedMention} handleAddMentionReply={handleAddMentionReply} handleAddNewTask={handleAddNewTask} isLoading={isLoading} mentions={mentions} />
         </div>
         </div>
       </div>

@@ -4,12 +4,7 @@ import Mention from './Mention';
 import Profile from './Profile';
 import '../../index.css';
 
-const OverView = ({mentions, isLoading, handleAddNewTask, handleAddMentionReply}) => {
-  const [currentMention, setCurrentMention] = useState(null);
-  const setSelectedMention = (mentionId) => {
-    const selectedMention = mentions.find(m => m.mentionID == mentionId);
-    setCurrentMention(selectedMention);
-  }
+const OverView = ({mentions, isLoading, handleAddNewTask, handleAddMentionReply, setSelectedMention, currentMention}) => {
   return (
     <div className="row">
       <div className="col-3 mentionsSection">

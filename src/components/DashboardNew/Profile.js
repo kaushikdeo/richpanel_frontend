@@ -4,10 +4,15 @@ import mailIcon from '../../images/mail.svg'
 import closeIcon from '../../images/close.svg'
 
 const Profile = ({currentMention}) => {
+  console.log('currentMentioncurrentMentioncurrentMentioncurrentMention', currentMention);
+  if (currentMention) {
+    console.log('currentMentioncurrentMentioncurrentMentioncurrentMention', currentMention.userData.profileImage);
+    console.log('currentMentioncurrentMentioncurrentMentioncurrentMention', currentMention);
+  }
   const renderTasks = () => {
     if (currentMention && currentMention.tasks && currentMention.tasks.length > 0) {
       return currentMention.tasks.map(task => {
-        return <div style={{display:'flex'}}><input checked={task.isCompleted} style={{marginTop:3.5}} type="checkbox" name="" id=""/> <label style={{margin:0,marginLeft:10}} htmlFor="">{task.taskText}</label></div>
+        return <div key={task._id} style={{display:'flex'}}><input checked={task.isCompleted} style={{marginTop:3.5}} type="checkbox" name="" id=""/> <label style={{margin:0,marginLeft:10}} htmlFor="">{task.taskText}</label></div>
       })
     } else {
       return <div className='centerContent' style={{minHeight:100}}><p>NO TASKS YET</p></div>
