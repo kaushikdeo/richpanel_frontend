@@ -43,7 +43,7 @@ const Dashboard = ({fetchMentions, addNewMentionTask, newMention}) => {
   }
 
   const handleLogoutClick = () => {
-    window.open("http://localhost:4000/auth/logout", "_self");
+    window.open("https://richpaneldash.herokuapp.com/auth/logout", "_self");
     this.props.handleNotAuthenticated();
   };
 
