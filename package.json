@@ -18,7 +18,7 @@
     "apollo-upload-client": "^10.0.1",
     "apollo-utilities": "^1.3.3",
     "bootstrap": "^4.4.1",
-    "express": "^4.17.1",
+    "express": "^4.22.1",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
     "lodash.flowright": "^3.5.0",
@@ -29,7 +29,7 @@
     "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "rodal": "^1.8.1",
     "subscriptions-transport-ws": "^0.9.16"
   },
